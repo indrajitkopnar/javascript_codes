@@ -1,0 +1,228 @@
+
+
+<svg class="clickable-svg" width="66" height="65" viewBox="0 0 66 65" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-top: 9px; margin-left: 28px;" (click)="navigateBackArrow()">
+    <rect x="1.18262" y="0.5" width="64" height="64" rx="3.5" fill="white"/>
+    <rect x="1.18262" y="0.5" width="64" height="64" rx="3.5" stroke="#DEDEDE"/>
+    <rect x="9.18262" y="8.5" width="48" height="48" rx="7" fill="#F8F8F8"/>
+    <path id="heartPath" d="M33.1828 43.1668L22.5161 32.5002L33.1828 21.8335L34.5828 23.2335L26.3161 31.5002H43.8494V33.5002H26.3161L34.5828 41.7668L33.1828 43.1668Z" fill="black"/>
+  </svg>
+  
+  
+  <div class="container">
+    <div class="create-query" style="font-size: 26px; margin-top: 26px;">Create Query</div>
+  </div>
+  
+  
+  <!-- First half content -->
+  
+  <div class="col-md-6">
+  
+    <!-- Visible rectangle container -->
+    <div class="visible-rectangle" style="margin-left: 30px;  margin-top: 7px;" >
+  
+        <!-- Sports section -->
+        <div class="accordion accordion-flush" id="accordionSports">
+            <div class="accordion-item" #accordionItem>
+                <h2 class="accordion-header" id="flush-headingSports">
+  
+  
+  
+  
+                    <!-- <button #sportsAccordionBtn class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSports" aria-expanded="false"
+                        aria-controls="flush-collapseSports">
+                       
+                        Sports
+                    </button> -->
+                </h2>
+                <div id="flush-collapseSports" class="accordion-collapse collapse" aria-labelledby="flush-headingSports"
+                    data-bs-parent="#accordionSports">
+                    <!-- Use *ngFor to loop through the sports array -->
+                    <div class="accordion-body" *ngFor="let sport of sports">
+                        <div class="form-check">
+                            <!-- Use [(ngModel)] to bind the selected sport -->
+                            <input class="form-check-input" type="radio" name="selectedSport" [id]="sport"
+                                [(ngModel)]="selectedSport" [value]="sport">
+                            <label class="form-check-label" [for]="sport">
+                                {{ sport }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+  
+  
+  
+        <!-- Category section -->
+        <div class="accordion accordion-flush mt-3" id="accordionCategory">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingCategory">
+                    <!-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseCategory" aria-expanded="false"
+                        aria-controls="flush-collapseCategory">
+                        Category
+                    </button> -->
+                </h2>
+                <div id="flush-collapseCategory" class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingCategory" data-bs-parent="#accordionCategory">
+                    <!-- Add your content for the Category section here -->
+                    <!-- You can include a selection list or other elements -->
+                </div>
+            </div>
+        </div>
+  
+  
+  
+        <!-- Tag section -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingCategory">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseCategory" aria-expanded="false"
+                    aria-controls="flush-collapseCategory">
+              Tags
+            </button>
+          </h2>
+          <div id="flush-collapseCategory" class="accordion-collapse collapse"
+               aria-labelledby="flush-headingCategory" data-bs-parent="#accordionCategory">
+            <!-- Add your content for the Category section here -->
+            <!-- You can include a selection list or other elements -->
+        
+            <div *ngFor="let tagData of tagsData">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [id]="tagData.id" [value]="tagData.value" 
+                       [checked]="selectedTags.includes(tagData.value)" (change)="handleCheckboxChange(tagData.value, $event)">
+                <label class="form-check-label" [for]="tagData.id">
+                  {{ tagData.value }}
+                </label>
+              </div>
+              
+              <div *ngIf="tagData.subtags.length > 0" class="d-flex flex-wrap">
+                <div *ngFor="let subtag of tagData.subtags" class="ms-3">
+                  <input class="form-check-input" type="checkbox" [id]="subtag" [value]="subtag" 
+                         [checked]="selectedTags.includes(subtag)" (change)="handleCheckboxChange(subtag, $event)">
+                  <label class="form-check-label" [for]="subtag">
+                    {{ subtag }}
+                  </label>
+                </div>
+              </div>
+            </div>
+        
+            <!-- <button type="button" class="btn btn-primary" (click)="sendTags()">Query</button> -->
+          </div>
+        </div>
+        
+        
+  
+  
+  
+                        <!-- Tag section ended -->
+  
+  
+  
+        <!-- Selection List section -->
+        <div class="accordion accordion-flush mt-3" id="accordionSelectionList">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSelectionList">
+                    <!-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSelectionList" aria-expanded="false"
+                        aria-controls="flush-collapseSelectionList">
+                        Selection List
+                    </button> -->
+                </h2>
+                <div id="flush-collapseSelectionList" class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingSelectionList" data-bs-parent="#accordionSelectionList">
+                    <!-- Add your content for the Selection List section here -->
+                    <!-- You can include a list or other elements -->
+                </div>
+            </div>
+        </div>
+  
+     <!-- Selected section -->
+     <div class="accordion accordion-flush mt-3" id="accordionSelected" #selectedAccordion>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingSelected">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseSelected" aria-expanded="false"
+                  aria-controls="flush-collapseSelected">
+            Selected Filter
+          </button>
+        </h2>
+        <div id="flush-collapseSelected" class="accordion-collapse collapse"
+             aria-labelledby="flush-headingSelected" data-bs-parent="#accordionSelected">
+          <!-- Rectangle for "Selected Filter" -->
+          <!-- <div class="selected-filter-rectangle">
+              <p>Selected Filter</p>
+          </div> -->
+    
+          <!-- Display selected sports and tags inside the rectangle -->
+          <div class="rectangle-inside-selected-container" style="flex-direction: column;">
+            <!-- <div class="rectangle-inside-selected" style="border: transparent; display: flex; flex-wrap: wrap; height: auto;"> -->
+              {{ selectedSport }}
+              <!-- Display selected tags horizontally -->
+              <ng-container *ngIf="selectedTags.length > 0">
+                <span *ngFor="let tag of selectedTags">
+                  {{ tag }},
+                </span>
+              </ng-container>
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    
+      <!-- Apply and Clear All buttons outside the accordion body -->
+    <div class="mt-3" style="display: flex; gap: 10px;">
+      <button type="button" class="btn btn-primary" (click)="sendTags()"
+          style="width: 142px; padding: 6px 12px; justify-content: center; align-items: center; gap: 10px; border-radius: 4px; background: var(--Tertiary, #8FAB07); margin-right: 10px;">
+          Apply
+      </button>
+  
+      <button class="btn btn-light" (click)="clearAllSelections()"
+          style="width: 142px; padding: 6px 31px; justify-content: center; align-items: center; gap: 10px; border-radius: 6px; border: 1px solid #DEDEDE; background: #FFF; box-shadow: 2px 7px 20px 0px rgba(0, 0, 0, 0.06);">
+          Clear All
+      </button>
+  </div>
+  
+      
+    </div>
+  
+  
+  </div>
+  </div>
+  
+  <!-- Second half content -->
+  <div class=" mt-2">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-6">
+        <h4>&nbsp;</h4>
+        <div class="row justify-content-end">
+         
+          <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-8">
+              <div class="search-box" style="margin-top: 88px;">
+                <i class="fa fa-search"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Right Column -->
+     
+      <div class="col-md-6" style="margin-top: -480px;">
+        <div *ngFor="let segment of matchingSegments; let last = last">
+          <p>Session Name: {{ segment.sessionName }}</p>
+          <p>Timestamp: {{ segment.timestamp }}</p>
+          <p>Duration: {{ segment.duration }}</p>
+          <p>URI: {{ segment.uri }}</p>
+          <p>Radial Tags: {{ segment.radialTag.join(', ') }}</p>
+          <hr *ngIf="!last">
+        </div>
+      </div>
+    
+  
+    </div>
+  </div>
+  
